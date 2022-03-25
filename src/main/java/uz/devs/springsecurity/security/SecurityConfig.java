@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
                 .antMatchers("/api/**").hasRole(ADMIN.name())
@@ -46,14 +47,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .password(passwordEncoder.encode("number1man"))
                 .roles(STUDENT.name())     //ROLE_STUDENT
                 .build();
+
         UserDetails user_abubakr = User.builder()
                 .username("abubakr")
                 .password(passwordEncoder.encode("number1teacher"))
                 .roles(ADMIN.name())
                 .build();
 
+        UserDetails user_abdallah = User.builder()
+                .username("abdullah")
+                .password(passwordEncoder.encode("number2man"))
+                .roles(ADMINTRAINEE.name())
+                .build();
+
         return new InMemoryUserDetailsManager(
-                user_alitalib,user_abubakr
+                user_alitalib,
+                user_abubakr,
+                user_abdallah
         );
     }
 }
