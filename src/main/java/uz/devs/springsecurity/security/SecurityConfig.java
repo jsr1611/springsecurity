@@ -51,19 +51,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         UserDetails user_alitalib = User.builder()
                 .username("alitalib")
                 .password(passwordEncoder.encode("number1man"))
-                .roles(STUDENT.name())     //ROLE_STUDENT
+//                .roles(STUDENT.name())     //ROLE_STUDENT
+                .authorities(STUDENT.getGrantedAuthorities())
                 .build();
 
         UserDetails user_abubakr = User.builder()
                 .username("abubakr")
                 .password(passwordEncoder.encode("number1teacher"))
-                .roles(ADMIN.name())
+//                .roles(ADMIN.name())         //ROLE_ADMIN
+                .authorities(ADMIN.getGrantedAuthorities())
                 .build();
 
         UserDetails user_abdallah = User.builder()
                 .username("abdullah")
                 .password(passwordEncoder.encode("number2man"))
-                .roles(ADMINTRAINEE.name())
+//                .roles(ADMINTRAINEE.name())      //ROLE_ADMINTRAINEE
+                .authorities(ADMINTRAINEE.getGrantedAuthorities())
                 .build();
 
         return new InMemoryUserDetailsManager(
